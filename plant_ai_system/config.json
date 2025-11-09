@@ -1,0 +1,61 @@
+{
+  "species_model_type": "clip",
+  "yolo_model_path": null,
+  "confidence_threshold": 0.5,
+  "top_k_species": 5,
+  "output_dir": "results",
+  "data_paths": {
+    "plantclef2022": "data/plantclef2022",
+    "health_monitoring": "data/health_monitoring/plant_leaf_diseases\\..",
+    "processed": "data/processed",
+    "plant_leaf_diseases": "data/health_monitoring/plant_leaf_diseases"
+  },
+  "model_paths": {
+    "species_recognition": "models/species_recognition",
+    "health_monitor": "models/health_monitor"
+  },
+  "training": {
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "epochs": 100,
+    "early_stopping_patience": 10
+  },
+  "inference": {
+    "image_size": 224,
+    "normalize_mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "normalize_std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "health_monitoring": {
+    "num_classes": 10,
+    "disease_classes": [
+      "Apple___Apple_scab",
+      "Apple___Black_rot",
+      "Apple___Cedar_apple_rust",
+      "Cherry___Powdery_mildew",
+      "Corn___Cercospora_leaf_spot Gray_leaf_spot",
+      "splits"
+    ],
+    "healthy_classes": [
+      "Apple___healthy",
+      "Blueberry___healthy",
+      "Cherry___healthy"
+    ],
+    "background_classes": [
+      "Background_without_leaves"
+    ]
+  }
+}
+
+
+
+
+
+

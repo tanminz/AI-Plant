@@ -1,0 +1,744 @@
+{% extends "base.html" %}
+
+{% block title %}Plant AI - Advanced Disease Detection System{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Full-Width Cover Image -->
+<section class="hero-cover fade-in" style="background-image: url('{{ url_for('static', filename='images/plant.jpg') }}');">
+    <div class="hero-overlay text-center d-flex align-items-center">
+        <div class="container hero-content">
+            <h1 class="display-3 fw-bold mb-3">
+                <i class="fas fa-seedling me-3"></i>
+                Plant AI System
+            </h1>
+            <p class="lead fs-4 mb-3">
+                Advanced AI-Powered Plant Disease Detection & Analysis
+            </p>
+            <p class="fs-5 mb-0">
+                Recognize diseases from <strong>9+ plant types</strong> including Apple, Cherry, Corn, Durian, Cashew, Cassava, Maize, Tomato, and more
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<div class="row mb-5" id="statsSection">
+    <div class="col-md-4 mb-4">
+        <div class="stat-card">
+            <div class="stat-number" id="plantTypesCount">9+</div>
+            <h5 class="text-muted mt-2">Plant Types</h5>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="stat-card">
+            <div class="stat-number" id="diseasesCount">50+</div>
+            <h5 class="text-muted mt-2">Diseases Detected</h5>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="stat-card">
+            <div class="stat-number" id="modelAccuracy">95%</div>
+            <h5 class="text-muted mt-2">Accuracy</h5>
+        </div>
+    </div>
+</div>
+
+<div id="disease-prediction" class="section-anchor"></div>
+
+<!-- Upload Card -->
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-cloud-upload-alt me-2"></i>
+                Upload Plant Image for Analysis
+            </div>
+            <div class="card-body p-5">
+                <!-- Upload Area -->
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-images"></i>
+                    <h4 class="mt-3 mb-2">Drag & Drop Your Image Here</h4>
+                    <p class="text-muted mb-4">or click to browse files</p>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    <button class="btn btn-primary btn-lg" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-folder-open me-2"></i>Choose Image File
+                    </button>
+                    <p class="text-muted mt-3 small">Supported formats: JPG, PNG, GIF, BMP (Max 16MB)</p>
+                </div>
+
+                <!-- Preview -->
+                <div id="imagePreview" class="text-center mt-4" style="display: none;">
+                    <img id="previewImg" class="img-fluid rounded shadow" style="max-height: 400px; border: 4px solid #11998e;">
+                </div>
+
+                <!-- Upload Button -->
+                <div class="text-center mt-4">
+                    <button id="uploadBtn" class="btn btn-primary btn-lg" disabled>
+                        <i class="fas fa-search me-2"></i>Analyze Plant Disease
+                    </button>
+                </div>
+            </div>
+        </div>
+
+<!-- Additional Services -->
+<div id="plant-identification" class="section-anchor"></div>
+<section class="elegant-card mt-5">
+    <div class="elegant-card-header info">
+        <div class="header-icon">
+            <i class="fas fa-leaf"></i>
+        </div>
+        <div>
+            <h5>Plant Identification</h5>
+            <p class="header-subtitle">Upload a plant photo to match with our extensive species database.</p>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="professional-list">
+            <div class="professional-item">
+                <div class="list-icon info">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="list-content">
+                    <span class="list-title">Image Recognition</span>
+                    <p>Leverage our AI-powered vision to identify plant species with high accuracy using leaf, flower, or stem images.</p>
+                </div>
+            </div>
+            <div class="professional-item">
+                <div class="list-icon info">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="list-content">
+                    <span class="list-title">Species Knowledgebase</span>
+                    <p>Access curated profiles with common names, scientific classifications, habitat preferences, and care guidelines.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="plant-purchase" class="section-anchor"></div>
+<section class="elegant-card mt-4">
+    <div class="elegant-card-header">
+        <div class="header-icon">
+            <i class="fas fa-shopping-basket"></i>
+        </div>
+        <div>
+            <h5>Plant Purchase Suggestions</h5>
+            <p class="header-subtitle">Smart recommendations for acquiring healthy plants and accessories.</p>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="professional-list">
+            <div class="professional-item">
+                <div class="list-icon success">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="list-content">
+                    <span class="list-title">Trusted Suppliers</span>
+                    <p>Receive curated lists of nurseries and online stores based on your location and preferred plant species.</p>
+                </div>
+            </div>
+            <div class="professional-item">
+                <div class="list-icon success">
+                    <i class="fas fa-notes-medical"></i>
+                </div>
+                <div class="list-content">
+                    <span class="list-title">Health Checklist</span>
+                    <p>Built-in inspection guidelines to evaluate leaf color, stem strength, and root condition before purchase.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="chat-bot" class="section-anchor"></div>
+<section class="elegant-card mt-4">
+    <div class="elegant-card-header info">
+        <div class="header-icon">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div>
+            <h5>Plant Care Chat Bot</h5>
+            <p class="header-subtitle">Interactive assistant for real-time troubleshooting and coaching.</p>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="professional-list">
+            <div class="professional-item">
+                <div class="list-icon info">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="list-content">
+                    <span class="list-title">24/7 Support</span>
+                    <p>Ask questions about watering schedules, fertilization plans, and disease prevention anytime.</p>
+                </div>
+            </div>
+            <div class="professional-item">
+                <div class="list-icon info">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <div class="list-content">
+                    <span class="list-title">Symptom Checker</span>
+                    <p>Describe visual symptoms to receive instant AI-driven diagnostics and actionable recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="contact" class="section-anchor"></div>
+<section class="elegant-card mt-4 mb-5">
+    <div class="elegant-card-header">
+        <div class="header-icon">
+            <i class="fas fa-envelope-open-text"></i>
+        </div>
+        <div>
+            <h5>Contact Plant AI Team</h5>
+            <p class="header-subtitle">We are here to support your precision agriculture journey.</p>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-6">
+                <div class="professional-item" style="border-bottom: none; padding-bottom: 0;">
+                    <div class="list-icon success">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="list-content">
+                        <span class="list-title">Customer Success</span>
+                        <p>Email: <a href="mailto:support@plantai.system" class="text-decoration-none">support@plantai.system</a><br>
+                           Phone: +1 (800) 555-PLNT</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="professional-item" style="border-bottom: none; padding-bottom: 0;">
+                    <div class="list-icon info">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="list-content">
+                        <span class="list-title">Consulting & Training</span>
+                        <p>Book expert sessions for agronomy audits, farm digitalization, and on-site model deployments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- Loading -->
+        <div class="loading text-center" id="loading" style="display: none;">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <h5 class="mt-4" style="color: var(--text-dark);">Analyzing your plant image with AI...</h5>
+            <p style="color: var(--text-gray);">This may take a few seconds</p>
+        </div>
+
+        <!-- Results -->
+        <div id="results" style="display: none;"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Load stats
+    loadStats();
+
+    const uploadArea = $('#uploadArea');
+    const fileInput = $('#fileInput');
+    const uploadBtn = $('#uploadBtn');
+    const imagePreview = $('#imagePreview');
+    const previewImg = $('#previewImg');
+    const loading = $('#loading');
+    const results = $('#results');
+
+    // Drag and drop functionality
+    uploadArea.on('dragover', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).addClass('dragover');
+    });
+
+    uploadArea.on('dragleave', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).removeClass('dragover');
+    });
+
+    uploadArea.on('drop', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).removeClass('dragover');
+        const files = e.originalEvent.dataTransfer.files;
+        if (files.length > 0) {
+            handleFile(files[0]);
+        }
+    });
+
+    // Click to upload
+    uploadArea.on('click', function(e) {
+        if (!$(e.target).is('button')) {
+            fileInput.click();
+        }
+    });
+
+    // File input change
+    fileInput.on('change', function() {
+        if (this.files.length > 0) {
+            handleFile(this.files[0]);
+        }
+    });
+
+    // Upload button click
+    uploadBtn.on('click', function() {
+        uploadFile();
+    });
+
+    function handleFile(file) {
+        if (file && file.type.startsWith('image/')) {
+            if (file.size > 16 * 1024 * 1024) {
+                alert('File size exceeds 16MB limit. Please choose a smaller image.');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.attr('src', e.target.result);
+                imagePreview.fadeIn(300);
+                uploadBtn.prop('disabled', false).addClass('btn-success').removeClass('btn-primary');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('Please select a valid image file (JPG, PNG, GIF, BMP).');
+        }
+    }
+
+    function uploadFile() {
+        const file = fileInput[0].files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        // Show loading
+        loading.fadeIn(300);
+        results.hide();
+        uploadBtn.prop('disabled', true);
+
+        $.ajax({
+            url: '/upload',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                loading.hide();
+                uploadBtn.prop('disabled', false);
+                if (response.success) {
+                    displayResults(response);
+                } else {
+                    alert('Error: ' + (response.error || 'Unknown error occurred'));
+                }
+            },
+            error: function(xhr) {
+                loading.hide();
+                uploadBtn.prop('disabled', false);
+                alert('An error occurred while processing your request. Please try again.');
+                console.error(xhr);
+            }
+        });
+    }
+
+    function displayResults(data) {
+        const health = data.health_analysis;
+        const confidence = (data.confidence * 100).toFixed(1);
+        const severityClass = health.severity === 'High' ? 'severity-high' : 
+                             health.severity === 'Moderate' ? 'severity-moderate' : 
+                             'severity-none';
+        
+        // Get the uploaded image
+        const imageSrc = $('#previewImg').attr('src') || '';
+        
+        let resultHtml = `
+            <div class="card fade-in mb-4" style="border: none; box-shadow: var(--shadow-lg);">
+                <div class="card-header" style="background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%); color: white; border: none;">
+                    <h3 class="mb-0">
+                        <i class="fas fa-microscope me-2"></i>
+                        Analysis Results
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <!-- Left Column: Image -->
+                        <div class="col-lg-5 mb-4 mb-lg-0">
+                            <div class="text-center">
+                                <h5 class="mb-3" style="color: var(--text-dark); font-weight: 600;">
+                                    <i class="fas fa-image me-2" style="color: var(--primary-green);"></i>
+                                    Plant Image
+                                </h5>
+                                <div class="image-container" style="border: 3px solid var(--primary-green); border-radius: 12px; padding: 10px; background: var(--bg-light); box-shadow: var(--shadow);">
+                                    <img src="${imageSrc}" class="img-fluid rounded" style="max-height: 500px; width: 100%; object-fit: contain;" alt="Analyzed Plant Image">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column: Analysis Details -->
+                        <div class="col-lg-7">
+                            <div class="analysis-details">
+                                <!-- Predicted Disease -->
+                                <div class="info-card mb-3" style="border-left: 4px solid var(--primary-green);">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-bug fa-lg me-2" style="color: var(--primary-green);"></i>
+                                        <h5 class="mb-0" style="color: var(--text-dark); font-weight: 600;">Predicted Disease</h5>
+                                    </div>
+                                    <h4 class="mb-0" style="color: var(--primary-green); font-weight: 700;">${health.disease_name || data.predicted_class}</h4>
+                                </div>
+                                
+                                <!-- Parameters -->
+                                <div class="info-card mb-3">
+                                    <h6 class="mb-3" style="color: var(--primary-green); font-weight: 600;">
+                                        <i class="fas fa-chart-bar me-2"></i>Analysis Parameters
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="parameter-item">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <span style="color: var(--text-gray); font-size: 0.9rem;">
+                                                        <i class="fas fa-leaf me-1"></i>Plant Type
+                                                    </span>
+                                                    <strong style="color: var(--text-dark);">${health.plant_type || 'Unknown'}</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="parameter-item">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <span style="color: var(--text-gray); font-size: 0.9rem;">
+                                                        <i class="fas fa-percentage me-1"></i>Confidence
+                                                    </span>
+                                                    <strong style="color: var(--primary-green);">${confidence}%</strong>
+                                                </div>
+                                                <div class="progress" style="height: 8px; margin-top: 4px;">
+                                                    <div class="progress-bar" style="width: ${confidence}%; background: var(--primary-green);"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="parameter-item">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <span style="color: var(--text-gray); font-size: 0.9rem;">
+                                                        <i class="fas fa-heartbeat me-1"></i>Health Score
+                                                    </span>
+                                                    <strong style="color: var(--primary-green); font-size: 1.2rem;">${health.score}/100</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="parameter-item">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <span style="color: var(--text-gray); font-size: 0.9rem;">
+                                                        <i class="fas fa-exclamation-triangle me-1"></i>Severity
+                                                    </span>
+                                                    <span class="severity-badge ${severityClass}">${health.severity}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="parameter-item">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <span style="color: var(--text-gray); font-size: 0.9rem;">
+                                                        <i class="fas fa-info-circle me-1"></i>Status
+                                                    </span>
+                                                    <span class="badge ${health.treatment_needed ? 'bg-danger' : 'bg-success'} fs-6 px-3 py-2">
+                                                        ${health.status}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Description -->
+                                ${health.description ? `
+                                <div class="info-card mb-3">
+                                    <h6 class="mb-2" style="color: var(--primary-green); font-weight: 600;">
+                                        <i class="fas fa-file-alt me-2"></i>Description
+                                    </h6>
+                                    <p class="mb-0" style="color: var(--text-dark); line-height: 1.7; font-size: 0.95rem;">
+                                        ${health.description}
+                                    </p>
+                                </div>
+                                ` : ''}
+                                
+                                <!-- Identifying Characteristics (Symptoms) -->
+                                ${health.symptoms && health.symptoms.length > 0 ? `
+                                <div class="info-card mb-3">
+                                    <h6 class="mb-3" style="color: var(--primary-green); font-weight: 600;">
+                                        <i class="fas fa-search me-2"></i>Identifying Characteristics
+                                    </h6>
+                                    <ul class="list-unstyled mb-0">
+                                ` : ''}
+                                ${health.symptoms ? health.symptoms.map(symptom => `
+                                    <li class="mb-2" style="color: var(--text-dark);">
+                                        <i class="fas fa-check-circle me-2" style="color: var(--primary-green);"></i>
+                                        <span style="font-size: 0.95rem;">${symptom}</span>
+                                    </li>
+                                `).join('') : ''}
+                                ${health.symptoms && health.symptoms.length > 0 ? `
+                                    </ul>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Top predictions
+        if (data.top_predictions && data.top_predictions.length > 0) {
+            resultHtml += `
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar me-2"></i>Top Predictions
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+            `;
+            data.top_predictions.forEach((pred, index) => {
+                const percentage = (pred.probability * 100).toFixed(1);
+                resultHtml += `
+                    <div class="col-md-4 mb-3">
+                        <div class="info-card">
+                            <h6>#${index + 1} ${pred.class}</h6>
+                            <div class="progress mb-2">
+                                <div class="progress-bar" style="width: ${percentage}%">${percentage}%</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            resultHtml += `
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Treatment Recommendations / Care Plan
+        if (health.recommendations && health.recommendations.length > 0) {
+            const recommendationItems = health.recommendations.map((rec, index) => `
+                <div class="professional-item">
+                    <div class="list-icon success">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="list-content">
+                        <span class="list-title">${health.treatment_needed ? `Step ${index + 1}` : 'Care Tip'}</span>
+                        <p>${rec}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            resultHtml += `
+                <div class="elegant-card mt-4">
+                    <div class="elegant-card-header">
+                        <div class="header-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <h5>${health.treatment_needed ? 'Treatment Action Plan' : 'Care Recommendations'}</h5>
+                            <p class="header-subtitle">${health.treatment_needed ? 'Follow these professional treatment steps to restore plant health.' : 'Recommended routine care to keep the plant thriving.'}</p>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="professional-list">
+                            ${recommendationItems}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Prevention Tips
+        if (health.prevention && health.prevention.length > 0) {
+            const preventionItems = health.prevention.map((tip, index) => `
+                <div class="professional-item">
+                    <div class="list-icon info">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="list-content">
+                        <span class="list-title">Preventive Tip ${index + 1}</span>
+                        <p>${tip}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            resultHtml += `
+                <div class="elegant-card mt-4">
+                    <div class="elegant-card-header info">
+                        <div class="header-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h5>Prevention Strategy</h5>
+                            <p class="header-subtitle">Proactive measures to strengthen immunity and avoid reinfection.</p>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="professional-list">
+                            ${preventionItems}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // OpenAI Treatment Advice
+        if (data.openai_advice) {
+            const advice = data.openai_advice;
+            
+            // Overview
+            if (advice.overview) {
+                resultHtml += `
+                    <div class="card mt-4">
+                        <div class="card-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            <i class="fas fa-brain me-2"></i>AI-Powered Treatment Overview
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-0">${advice.overview}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Treatment Steps
+            if (advice.treatment_steps && advice.treatment_steps.length > 0) {
+                resultHtml += `
+                    <div class="card mt-4">
+                        <div class="card-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            <i class="fas fa-tasks me-2"></i>Treatment Steps
+                        </div>
+                        <div class="card-body">
+                            <ol class="list-group list-group-numbered">
+                `;
+                advice.treatment_steps.forEach((step, index) => {
+                    resultHtml += `<li class="list-group-item"><strong>Step ${index + 1}:</strong> ${step}</li>`;
+                });
+                resultHtml += `
+                            </ol>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Medicines
+            if (advice.medicines && advice.medicines.length > 0) {
+                resultHtml += `
+                    <div class="card mt-4">
+                        <div class="card-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            <i class="fas fa-pills me-2"></i>Recommended Medicines & Treatments
+                        </div>
+                        <div class="card-body">
+                `;
+                advice.medicines.forEach((medicine, index) => {
+                    resultHtml += `
+                        <div class="info-card mb-3">
+                            <h6><i class="fas fa-capsules me-2"></i>${medicine.name || 'Medicine ' + (index + 1)}</h6>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Type:</strong> ${medicine.type || 'N/A'}</p>
+                                    <p class="mb-1"><strong>Dosage:</strong> ${medicine.dosage || 'N/A'}</p>
+                                    <p class="mb-1"><strong>Frequency:</strong> ${medicine.frequency || 'N/A'}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Application:</strong> ${medicine.application || 'N/A'}</p>
+                                    <p class="mb-0"><strong>Safety:</strong> ${medicine.safety || 'N/A'}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                resultHtml += `
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Care Instructions
+            if (advice.care_instructions && advice.care_instructions.length > 0) {
+                resultHtml += `
+                    <div class="card mt-4">
+                        <div class="card-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            <i class="fas fa-heart me-2"></i>Care Instructions
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                `;
+                advice.care_instructions.forEach(instruction => {
+                    resultHtml += `<li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>${instruction}</li>`;
+                });
+                resultHtml += `
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Timeline
+            if (advice.timeline) {
+                resultHtml += `
+                    <div class="card mt-4">
+                        <div class="card-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            <i class="fas fa-clock me-2"></i>Expected Recovery Timeline
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-0">${advice.timeline}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Monitoring
+            if (advice.monitoring) {
+                resultHtml += `
+                    <div class="card mt-4">
+                        <div class="card-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            <i class="fas fa-eye me-2"></i>What to Monitor
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-0">${advice.monitoring}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        results.html(resultHtml).fadeIn(500);
+        
+        // Scroll to results
+        $('html, body').animate({
+            scrollTop: results.offset().top - 100
+        }, 800);
+    }
+
+    function loadStats() {
+        $.ajax({
+            url: '/api/stats',
+            type: 'GET',
+            success: function(data) {
+                if (data.total_plant_types) {
+                    $('#plantTypesCount').text(data.total_plant_types + '+');
+                }
+                if (data.total_diseases) {
+                    $('#diseasesCount').text(data.total_diseases + '+');
+                }
+            },
+            error: function() {
+                console.log('Could not load stats');
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

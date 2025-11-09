@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Plant AI - History{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-history me-2"></i>Prediction History</h3>
+            </div>
+            <div class="card-body">
+                {% if results %}
+                    <div class="row">
+                        {% for result in results %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        <i class="fas fa-image me-2"></i>
+                                        {{ result.uploaded_file }}
+                                    </h6>
+                                    <p class="card-text">
+                                        <strong>Predicted:</strong> {{ result.predicted_class }}<br>
+                                        <strong>Confidence:</strong> {{ "%.1f"|format(result.confidence * 100) }}%<br>
+                                        <strong>Health Score:</strong> {{ result.health_analysis.score }}/100<br>
+                                        <strong>Status:</strong> 
+                                        <span class="badge bg-{{ 'danger' if result.health_analysis.treatment_needed else 'success' }}">
+                                            {{ result.health_analysis.status }}
+                                        </span>
+                                    </p>
+                                    <small class="text-muted">
+                                        <i class="fas fa-clock me-1"></i>
+                                        {{ result.timestamp[:19] }}
+                                    </small>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="showDetails('{{ loop.index0 }}')">
+                                        <i class="fas fa-eye me-1"></i>View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-history fa-3x text-muted mb-3"></i>
+                        <h5>No predictions yet</h5>
+                        <p class="text-muted">Upload some plant images to see your prediction history here.</p>
+                        <a href="/" class="btn btn-primary">
+                            <i class="fas fa-upload me-2"></i>Upload Image
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Details Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Prediction Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Details will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const results = {{ results | tojson }};
+
+function showDetails(index) {
+    const result = results[index];
+    const health = result.health_analysis;
+    
+    let detailsHtml = `
+        <div class="row">
+            <div class="col-md-6">
+                <h6>Prediction Results</h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Predicted Class:</span>
+                        <strong>${result.predicted_class}</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Confidence:</span>
+                        <strong>${(result.confidence * 100).toFixed(1)}%</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Health Score:</span>
+                        <strong>${health.score}/100</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Severity:</span>
+                        <span class="badge bg-${health.severity === 'High' ? 'danger' : health.severity === 'Moderate' ? 'warning' : 'success'}">${health.severity}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6>Health Analysis</h6>
+                <div class="alert alert-${health.treatment_needed ? 'danger' : 'success'}">
+                    <strong>${health.status}</strong><br>
+                    Treatment needed: ${health.treatment_needed ? 'Yes' : 'No'}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    if (result.top_predictions && result.top_predictions.length > 0) {
+        detailsHtml += `
+            <div class="mt-4">
+                <h6>Top Predictions</h6>
+                <div class="row">
+        `;
+        result.top_predictions.forEach(pred => {
+            const percentage = (pred.probability * 100).toFixed(1);
+            detailsHtml += `
+                <div class="col-md-4 mb-2">
+                    <div class="card">
+                        <div class="card-body p-2">
+                            <h6 class="card-title">${pred.class}</h6>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: ${percentage}%">${percentage}%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        detailsHtml += `
+                </div>
+            </div>
+        `;
+    }
+    
+    if (health.recommendations && health.recommendations.length > 0) {
+        detailsHtml += `
+            <div class="mt-4">
+                <h6>Recommendations</h6>
+                <ul class="list-group">
+        `;
+        health.recommendations.forEach(rec => {
+            detailsHtml += `<li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>${rec}</li>`;
+        });
+        detailsHtml += `
+                </ul>
+            </div>
+        `;
+    }
+    
+    document.getElementById('modalBody').innerHTML = detailsHtml;
+    new bootstrap.Modal(document.getElementById('detailsModal')).show();
+}
+</script>
+{% endblock %}
+
+
+
+
+
+
+
