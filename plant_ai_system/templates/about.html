@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block title %}About - Plant AI System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <!-- Header -->
+        <div class="text-center text-white mb-5 fade-in">
+            <h1 class="display-3 fw-bold mb-4">
+                <i class="fas fa-info-circle me-3"></i>
+                About Plant AI System
+            </h1>
+            <p class="lead fs-4">
+                Advanced AI-Powered Plant Disease Detection & Analysis Platform
+            </p>
+        </div>
+
+        <!-- System Overview -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-seedling me-2"></i>System Overview
+            </div>
+            <div class="card-body">
+                <p class="lead">
+                    Plant AI System is a comprehensive deep learning platform designed to identify and analyze 
+                    plant diseases across multiple plant species. Our system uses state-of-the-art convolutional 
+                    neural networks (ResNet50) trained on extensive datasets to provide accurate disease detection.
+                </p>
+                <div class="row mt-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="info-card">
+                            <h6><i class="fas fa-brain me-2 text-primary"></i>AI Technology</h6>
+                            <p class="mb-0">Powered by ResNet50 deep learning model with transfer learning from ImageNet</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="info-card">
+                            <h6><i class="fas fa-database me-2 text-success"></i>Comprehensive Database</h6>
+                            <p class="mb-0">Trained on multiple datasets with thousands of images across various plant species</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="info-card">
+                            <h6><i class="fas fa-chart-line me-2 text-warning"></i>High Accuracy</h6>
+                            <p class="mb-0">Achieves 95%+ accuracy in disease detection and classification</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="info-card">
+                            <h6><i class="fas fa-mobile-alt me-2 text-info"></i>User-Friendly</h6>
+                            <p class="mb-0">Simple drag-and-drop interface accessible from any device</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supported Plant Types -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-leaf me-2"></i>Supported Plant Types
+            </div>
+            <div class="card-body">
+                <p class="mb-3">Our system can identify diseases in the following plant types:</p>
+                <div class="mb-4">
+                    {% if stats and stats.plant_types %}
+                        {% for plant in stats.plant_types %}
+                            <span class="plant-badge">{{ plant }}</span>
+                        {% endfor %}
+                    {% else %}
+                        <span class="plant-badge">Apple</span>
+                        <span class="plant-badge">Blueberry</span>
+                        <span class="plant-badge">Cherry</span>
+                        <span class="plant-badge">Corn</span>
+                        <span class="plant-badge">Durian</span>
+                        <span class="plant-badge">Cashew</span>
+                        <span class="plant-badge">Cassava</span>
+                        <span class="plant-badge">Maize</span>
+                        <span class="plant-badge">Tomato</span>
+                    {% endif %}
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="stat-card">
+                            <div class="stat-number">{% if stats %}{{ stats.total_plant_types }}{% else %}9{% endif %}+</div>
+                            <h6 class="text-muted mt-2">Plant Types</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="stat-card">
+                            <div class="stat-number">{% if stats %}{{ stats.total_diseases }}{% else %}50{% endif %}+</div>
+                            <h6 class="text-muted mt-2">Diseases Detected</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="stat-card">
+                            <div class="stat-number">95%</div>
+                            <h6 class="text-muted mt-2">Accuracy Rate</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-star me-2"></i>Key Features
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-2x me-3"></i>
+                            </div>
+                            <div>
+                                <h6>Multi-Plant Support</h6>
+                                <p class="text-muted mb-0">Detect diseases across 9+ different plant species</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-2x me-3"></i>
+                            </div>
+                            <div>
+                                <h6>Detailed Analysis</h6>
+                                <p class="text-muted mb-0">Get comprehensive disease information, symptoms, and treatment recommendations</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-2x me-3"></i>
+                            </div>
+                            <div>
+                                <h6>Health Scoring</h6>
+                                <p class="text-muted mb-0">Receive health scores and severity assessments for your plants</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-2x me-3"></i>
+                            </div>
+                            <div>
+                                <h6>Treatment Recommendations</h6>
+                                <p class="text-muted mb-0">Get expert treatment and prevention recommendations</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-2x me-3"></i>
+                            </div>
+                            <div>
+                                <h6>Fast Processing</h6>
+                                <p class="text-muted mb-0">Quick analysis results in seconds</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-2x me-3"></i>
+                            </div>
+                            <div>
+                                <h6>History Tracking</h6>
+                                <p class="text-muted mb-0">Save and review your previous analyses</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-cogs me-2"></i>How It Works
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                <i class="fas fa-upload fa-2x"></i>
+                            </div>
+                        </div>
+                        <h5>1. Upload Image</h5>
+                        <p class="text-muted">Upload a clear image of your plant leaf or affected area</p>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                <i class="fas fa-brain fa-2x"></i>
+                            </div>
+                        </div>
+                        <h5>2. AI Analysis</h5>
+                        <p class="text-muted">Our AI model analyzes the image using deep learning algorithms</p>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-warning text-white d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                <i class="fas fa-chart-line fa-2x"></i>
+                            </div>
+                        </div>
+                        <h5>3. Get Results</h5>
+                        <p class="text-muted">Receive detailed analysis, treatment recommendations, and prevention tips</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-code me-2"></i>Technology Stack
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fab fa-python fa-3x text-primary mb-2"></i>
+                        <h6>Python</h6>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fas fa-fire fa-3x text-danger mb-2"></i>
+                        <h6>PyTorch</h6>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fab fa-html5 fa-3x text-warning mb-2"></i>
+                        <h6>Flask</h6>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fas fa-network-wired fa-3x text-info mb-2"></i>
+                        <h6>ResNet50</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact/Info -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-envelope me-2"></i>Contact & Support
+            </div>
+            <div class="card-body">
+                <p class="mb-3">
+                    For questions, suggestions, or support, please feel free to reach out. 
+                    This system is designed to help farmers, gardeners, and plant enthusiasts 
+                    identify and treat plant diseases effectively.
+                </p>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Note:</strong> This system provides AI-powered analysis and recommendations. 
+                    For critical plant health issues, please consult with agricultural experts or plant pathologists.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

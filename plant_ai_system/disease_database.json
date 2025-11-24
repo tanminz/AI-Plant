@@ -1,0 +1,651 @@
+{
+  "diseases": {
+    "Apple_Healthy": {
+      "name": "Healthy Apple",
+      "plant_type": "Apple",
+      "status": "Healthy",
+      "severity": "None",
+      "description": "The apple tree is in excellent health with no signs of disease or pest infestation.",
+      "symptoms": ["Normal green leaves", "Healthy fruit development", "No discoloration"],
+      "treatment": {
+        "needed": false,
+        "recommendations": [
+          "Continue current care routine",
+          "Maintain proper watering schedule",
+          "Regular monitoring for early detection",
+          "Apply preventive fungicides in spring"
+        ]
+      },
+      "prevention": [
+        "Proper pruning",
+        "Adequate spacing for air circulation",
+        "Regular inspection"
+      ],
+      "health_score": 95
+    },
+    "Apple_Scab": {
+      "name": "Apple Scab",
+      "plant_type": "Apple",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Apple scab is a fungal disease caused by Venturia inaequalis. It affects leaves, fruits, and twigs.",
+      "symptoms": ["Olive-green to black spots on leaves", "Velvety lesions on fruit", "Premature leaf drop"],
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply copper-based fungicide (copper sulfate or Bordeaux mixture)",
+          "Remove and destroy infected leaves immediately",
+          "Improve air circulation through pruning",
+          "Avoid overhead watering",
+          "Apply fungicide in early spring before bud break"
+        ]
+      },
+      "prevention": [
+        "Plant resistant varieties",
+        "Remove fallen leaves in autumn",
+        "Maintain proper tree spacing"
+      ],
+      "health_score": 60
+    },
+    "Apple_Black_Rot": {
+      "name": "Apple Black Rot",
+      "plant_type": "Apple",
+      "status": "Diseased",
+      "severity": "High",
+      "description": "Black rot is a fungal disease that causes fruit rot and canker formation on branches.",
+      "symptoms": ["Brown spots on fruit", "Black cankers on branches", "Withered leaves"],
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply mancozeb fungicide",
+          "Prune infected branches immediately",
+          "Improve drainage around tree",
+          "Remove fallen fruit and debris",
+          "Apply fungicide during bloom period"
+        ]
+      },
+      "prevention": [
+        "Prune dead wood regularly",
+        "Avoid wounding tree bark",
+        "Remove mummified fruit"
+      ],
+      "health_score": 45
+    },
+    "Apple_Cedar_Rust": {
+      "name": "Cedar Apple Rust",
+      "plant_type": "Apple",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Cedar apple rust is a fungal disease that requires both apple and juniper trees to complete its life cycle.",
+      "symptoms": ["Yellow-orange spots on leaves", "Galls on juniper trees", "Premature defoliation"],
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply sulfur-based fungicide",
+          "Remove nearby juniper trees if possible",
+          "Spray fungicide in early spring",
+          "Improve air circulation",
+          "Apply protective fungicide before infection"
+        ]
+      },
+      "prevention": [
+        "Remove juniper trees within 2 miles",
+        "Plant rust-resistant varieties",
+        "Early season fungicide application"
+      ],
+      "health_score": 50
+    },
+    "Cherry_Healthy": {
+      "name": "Healthy Cherry",
+      "plant_type": "Cherry",
+      "status": "Healthy",
+      "severity": "None",
+      "description": "The cherry tree is healthy and thriving.",
+      "symptoms": ["Normal growth", "Healthy leaves", "Good fruit production"],
+      "treatment": {
+        "needed": false,
+        "recommendations": [
+          "Maintain current care practices",
+          "Regular watering and fertilization",
+          "Monitor for pests and diseases"
+        ]
+      },
+      "health_score": 95
+    },
+    "Cherry_Powdery_Mildew": {
+      "name": "Cherry Powdery Mildew",
+      "plant_type": "Cherry",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Powdery mildew is a fungal disease that forms white powdery coating on leaves and shoots.",
+      "symptoms": ["White powdery coating on leaves", "Distorted leaves", "Reduced fruit quality"],
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply sulfur-based fungicide",
+          "Improve air circulation through pruning",
+          "Reduce humidity around plants",
+          "Prune for better light penetration",
+          "Apply fungicide at first sign of disease"
+        ]
+      },
+      "health_score": 55
+    },
+    "Blueberry_Healthy": {
+      "name": "Healthy Blueberry",
+      "plant_type": "Blueberry",
+      "status": "Healthy",
+      "severity": "None",
+      "description": "The blueberry plant is healthy and producing well.",
+      "treatment": {
+        "needed": false,
+        "recommendations": ["Maintain acidic soil pH", "Regular watering", "Monitor for pests"]
+      },
+      "health_score": 95
+    },
+    "Corn_Healthy": {
+      "name": "Healthy Corn",
+      "plant_type": "Corn",
+      "status": "Healthy",
+      "severity": "None",
+      "description": "The corn plant is healthy and growing well.",
+      "treatment": {
+        "needed": false,
+        "recommendations": ["Maintain proper spacing", "Adequate water", "Regular monitoring"]
+      },
+      "health_score": 95
+    },
+    "Corn_Common_Rust": {
+      "name": "Corn Common Rust",
+      "plant_type": "Corn",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Common rust is a fungal disease that causes reddish-brown pustules on leaves.",
+      "symptoms": ["Reddish-brown pustules", "Yellowing leaves", "Reduced yield"],
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply fungicide containing propiconazole",
+          "Plant resistant varieties",
+          "Remove infected plant debris",
+          "Improve air circulation"
+        ]
+      },
+      "health_score": 55
+    },
+    "Corn_Cercospora_Leaf_Spot": {
+      "name": "Corn Cercospora Leaf Spot",
+      "plant_type": "Corn",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Cercospora leaf spot causes gray to tan lesions on corn leaves.",
+      "symptoms": ["Gray to tan lesions", "Leaf blight", "Reduced photosynthesis"],
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply fungicide with azoxystrobin",
+          "Remove infected leaves",
+          "Improve field drainage",
+          "Crop rotation"
+        ]
+      },
+      "health_score": 60
+    },
+    "Durian_Healthy": {
+      "name": "Healthy Durian",
+      "plant_type": "Durian",
+      "status": "Healthy",
+      "severity": "None",
+      "description": "The durian tree is healthy and producing quality fruit.",
+      "treatment": {
+        "needed": false,
+        "recommendations": ["Maintain tropical conditions", "Regular fertilization", "Proper pruning"]
+      },
+      "health_score": 95
+    },
+    "Durian_Algal_Disease": {
+      "name": "Durian Algal Disease",
+      "plant_type": "Durian",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Algal disease causes leaf spots and can affect fruit quality.",
+      "symptoms": ["Leaf spots", "Reduced photosynthesis", "Poor fruit development"],
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply copper-based fungicide",
+          "Improve air circulation",
+          "Remove infected leaves",
+          "Maintain proper tree spacing"
+        ]
+      },
+      "health_score": 65
+    },
+    "Durian_Blight": {
+      "name": "Durian Blight",
+      "plant_type": "Durian",
+      "status": "Diseased",
+      "severity": "High",
+      "description": "Blight causes rapid wilting and death of plant tissues.",
+      "symptoms": ["Rapid wilting", "Brown lesions", "Leaf death"],
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply systemic fungicide",
+          "Remove infected parts immediately",
+          "Improve drainage",
+          "Reduce humidity"
+        ]
+      },
+      "health_score": 50
+    },
+    "Durian_Anthracnose": {
+      "name": "Durian Anthracnose",
+      "plant_type": "Durian",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Anthracnose causes dark lesions on leaves and fruit.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply chlorothalonil fungicide",
+          "Remove infected plant parts",
+          "Improve air circulation"
+        ]
+      },
+      "health_score": 60
+    },
+    "Durian_Phomopsis": {
+      "name": "Durian Phomopsis",
+      "plant_type": "Durian",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Phomopsis causes stem cankers and leaf spots.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply fungicide",
+          "Prune infected branches",
+          "Improve tree health"
+        ]
+      },
+      "health_score": 60
+    },
+    "Durian_Rhizoctonia": {
+      "name": "Durian Rhizoctonia",
+      "plant_type": "Durian",
+      "status": "Diseased",
+      "severity": "High",
+      "description": "Rhizoctonia causes root rot and damping off.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply soil fungicide",
+          "Improve drainage",
+          "Avoid overwatering",
+          "Remove infected plants"
+        ]
+      },
+      "health_score": 45
+    },
+    "Cashew_Healthy": {
+      "name": "Healthy Cashew",
+      "plant_type": "Cashew",
+      "status": "Healthy",
+      "severity": "None",
+      "description": "The cashew tree is healthy.",
+      "treatment": {
+        "needed": false,
+        "recommendations": ["Maintain proper care", "Regular monitoring"]
+      },
+      "health_score": 95
+    },
+    "Cashew_Anthracnose": {
+      "name": "Cashew Anthracnose",
+      "plant_type": "Cashew",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Anthracnose affects cashew leaves and nuts.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply fungicide",
+          "Remove infected parts",
+          "Improve air circulation"
+        ]
+      },
+      "health_score": 60
+    },
+    "Cashew_Red_Rust": {
+      "name": "Cashew Red Rust",
+      "plant_type": "Cashew",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Red rust causes orange-red pustules on leaves.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply fungicide",
+          "Remove infected leaves",
+          "Improve tree health"
+        ]
+      },
+      "health_score": 55
+    },
+    "Cashew_Leaf_Miner": {
+      "name": "Cashew Leaf Miner",
+      "plant_type": "Cashew",
+      "status": "Pest Infestation",
+      "severity": "Moderate",
+      "description": "Leaf miner larvae tunnel through leaves.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply systemic insecticide",
+          "Remove affected leaves",
+          "Use biological controls"
+        ]
+      },
+      "health_score": 65
+    },
+    "Cashew_Gumosis": {
+      "name": "Cashew Gumosis",
+      "plant_type": "Cashew",
+      "status": "Diseased",
+      "severity": "High",
+      "description": "Gumosis causes gum exudation and tree decline.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Improve soil drainage",
+          "Apply fungicide",
+          "Prune affected areas"
+        ]
+      },
+      "health_score": 50
+    },
+    "Cassava_Healthy": {
+      "name": "Healthy Cassava",
+      "plant_type": "Cassava",
+      "status": "Healthy",
+      "severity": "None",
+      "description": "The cassava plant is healthy.",
+      "treatment": {
+        "needed": false,
+        "recommendations": ["Maintain proper care"]
+      },
+      "health_score": 95
+    },
+    "Cassava_Brown_Spot": {
+      "name": "Cassava Brown Spot",
+      "plant_type": "Cassava",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Brown spot causes leaf lesions and defoliation.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply fungicide",
+          "Remove infected leaves",
+          "Improve field hygiene"
+        ]
+      },
+      "health_score": 60
+    },
+    "Cassava_Bacterial_Blight": {
+      "name": "Cassava Bacterial Blight",
+      "plant_type": "Cassava",
+      "status": "Diseased",
+      "severity": "High",
+      "description": "Bacterial blight causes wilting and leaf death.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply copper-based bactericide",
+          "Remove infected plants",
+          "Use disease-free planting material",
+          "Crop rotation"
+        ]
+      },
+      "health_score": 45
+    },
+    "Cassava_Mosaic": {
+      "name": "Cassava Mosaic",
+      "plant_type": "Cassava",
+      "status": "Diseased",
+      "severity": "High",
+      "description": "Mosaic virus causes mottled leaves and stunted growth.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Use virus-free planting material",
+          "Control whitefly vectors",
+          "Remove infected plants",
+          "Plant resistant varieties"
+        ]
+      },
+      "health_score": 40
+    },
+    "Cassava_Green_Mite": {
+      "name": "Cassava Green Mite",
+      "plant_type": "Cassava",
+      "status": "Pest Infestation",
+      "severity": "Moderate",
+      "description": "Green mites cause leaf damage and reduced yield.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply acaricide",
+          "Use biological controls",
+          "Improve field hygiene"
+        ]
+      },
+      "health_score": 65
+    },
+    "Maize_Healthy": {
+      "name": "Healthy Maize",
+      "plant_type": "Maize",
+      "status": "Healthy",
+      "severity": "None",
+      "description": "The maize plant is healthy.",
+      "treatment": {
+        "needed": false,
+        "recommendations": ["Maintain proper care"]
+      },
+      "health_score": 95
+    },
+    "Maize_Leaf_Blight": {
+      "name": "Maize Leaf Blight",
+      "plant_type": "Maize",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Leaf blight causes large lesions on maize leaves.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply fungicide",
+          "Remove infected leaves",
+          "Crop rotation",
+          "Plant resistant varieties"
+        ]
+      },
+      "health_score": 60
+    },
+    "Maize_Leaf_Spot": {
+      "name": "Maize Leaf Spot",
+      "plant_type": "Maize",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Leaf spot causes circular lesions on leaves.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply fungicide",
+          "Improve field drainage",
+          "Remove plant debris"
+        ]
+      },
+      "health_score": 60
+    },
+    "Maize_Fall_Armyworm": {
+      "name": "Maize Fall Armyworm",
+      "plant_type": "Maize",
+      "status": "Pest Infestation",
+      "severity": "High",
+      "description": "Fall armyworm larvae feed on leaves and ears.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply insecticide",
+          "Use biological controls",
+          "Early detection and treatment",
+          "Crop rotation"
+        ]
+      },
+      "health_score": 50
+    },
+    "Maize_Grasshopper": {
+      "name": "Maize Grasshopper",
+      "plant_type": "Maize",
+      "status": "Pest Infestation",
+      "severity": "Moderate",
+      "description": "Grasshoppers feed on leaves and can cause significant damage.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply insecticide",
+          "Use physical barriers",
+          "Biological controls"
+        ]
+      },
+      "health_score": 65
+    },
+    "Maize_Leaf_Beetle": {
+      "name": "Maize Leaf Beetle",
+      "plant_type": "Maize",
+      "status": "Pest Infestation",
+      "severity": "Moderate",
+      "description": "Leaf beetles skeletonize leaves.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply insecticide",
+          "Remove affected leaves",
+          "Use biological controls"
+        ]
+      },
+      "health_score": 65
+    },
+    "Maize_Streak_Virus": {
+      "name": "Maize Streak Virus",
+      "plant_type": "Maize",
+      "status": "Diseased",
+      "severity": "High",
+      "description": "Virus causes yellow streaks and stunted growth.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Control leafhopper vectors",
+          "Use virus-free seed",
+          "Remove infected plants",
+          "Plant resistant varieties"
+        ]
+      },
+      "health_score": 40
+    },
+    "Tomato_Healthy": {
+      "name": "Healthy Tomato",
+      "plant_type": "Tomato",
+      "status": "Healthy",
+      "severity": "None",
+      "description": "The tomato plant is healthy.",
+      "treatment": {
+        "needed": false,
+        "recommendations": ["Maintain proper care"]
+      },
+      "health_score": 95
+    },
+    "Tomato_Leaf_Blight": {
+      "name": "Tomato Leaf Blight",
+      "plant_type": "Tomato",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Leaf blight causes brown lesions on tomato leaves.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply fungicide",
+          "Remove infected leaves",
+          "Improve air circulation",
+          "Avoid overhead watering"
+        ]
+      },
+      "health_score": 60
+    },
+    "Tomato_Septoria_Leaf_Spot": {
+      "name": "Tomato Septoria Leaf Spot",
+      "plant_type": "Tomato",
+      "status": "Diseased",
+      "severity": "Moderate",
+      "description": "Septoria causes small circular spots on leaves.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Apply fungicide",
+          "Remove infected leaves",
+          "Improve spacing",
+          "Crop rotation"
+        ]
+      },
+      "health_score": 60
+    },
+    "Tomato_Leaf_Curl": {
+      "name": "Tomato Leaf Curl",
+      "plant_type": "Tomato",
+      "status": "Diseased",
+      "severity": "High",
+      "description": "Leaf curl virus causes curled leaves and stunted growth.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Control whitefly vectors",
+          "Use virus-free plants",
+          "Remove infected plants",
+          "Plant resistant varieties"
+        ]
+      },
+      "health_score": 45
+    },
+    "Tomato_Verticillium_Wilt": {
+      "name": "Tomato Verticillium Wilt",
+      "plant_type": "Tomato",
+      "status": "Diseased",
+      "severity": "High",
+      "description": "Verticillium wilt causes wilting and yellowing of leaves.",
+      "treatment": {
+        "needed": true,
+        "recommendations": [
+          "Use resistant varieties",
+          "Crop rotation",
+          "Improve soil drainage",
+          "Remove infected plants"
+        ]
+      },
+      "health_score": 45
+    }
+  },
+  "plant_types": [
+    "Apple",
+    "Blueberry",
+    "Cherry",
+    "Corn",
+    "Durian",
+    "Cashew",
+    "Cassava",
+    "Maize",
+    "Tomato"
+  ],
+  "total_diseases": 38,
+  "total_plant_types": 9
+}
+
